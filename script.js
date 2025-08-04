@@ -1,16 +1,17 @@
-function showPage(pageId) {
-  const pages = [
-    'homePage',
-    'loginPage',
-    'menuPage',
-    'bookingPage',
-    'contactPage',
-    'aboutPage',
-    'blogPage'
-  ];
-  pages.forEach((id) => {
-    document.getElementById(id).style.display = id === pageId ? 'block' : 'none';
+function showPage(id) {
+  const pages = ['homePage', 'loginPage', 'menuPage', 'bookingPage', 'contactPage', 'aboutPage', 'blogPage'];
+  pages.forEach(page => {
+    document.getElementById(page).style.display = page === id ? 'block' : 'none';
   });
+}
+
+function toggleSelection(item) {
+  item.classList.toggle('selected');
+}
+
+function submitOrder() {
+  alert('Order submitted successfully!');
+  showPage('homePage');
 }
 
 function submitBooking(event) {
@@ -27,14 +28,17 @@ function submitBooking(event) {
   showPage('homePage');
 }
 
-function toggleSelection(item) {
-  item.classList.toggle('selected');
+function filterMenu(category) {
+  const items = document.querySelectorAll('#menuList li');
+  items.forEach(item => {
+    if (category === 'all' || item.classList.contains(category)) {
+      item.style.display = 'inline-block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
 }
 
-function submitOrder() {
-  alert('Order submitted successfully!');
-  showPage('homePage');
-}
-
-// Show home page by default on load
+// Show home page on load
 window.onload = () => showPage('homePage');
+
